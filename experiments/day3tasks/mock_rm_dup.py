@@ -1,9 +1,28 @@
-file_cursor = open('MOCK_DATA_DUP.csv').read().split('\n')
-newfile = []
-for line in file_cursor:
-    if line not in newfile:
-         newfile.append(line)
-         
-
+file_cursor = open('MOCK_DATA_DUP.csv')
 outputfile = open('MOCK_DATA_NEW.csv', 'w')
-outputfile.write('\n'.join(newfile))
+entries = []
+duplicate_entries = []
+for line in file_cursor:
+	value = line.strip().split(",")
+	if value[0] not in entries:
+		entries.append(value[0])
+	else:
+		duplicate_entries.append(value[0])
+
+
+if len(duplicate_entries) > 0:
+	for line in file_cursor:
+		value = line.strip().split(',')
+                if value[0] in duplicate_entries:
+                    print line.strip()
+					outputfile.write(line)
+
+
+
+
+
+#print(newfile)
+#print(len(newfile))
+ 
+
+
