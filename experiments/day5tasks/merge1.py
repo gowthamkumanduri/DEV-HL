@@ -18,12 +18,12 @@ for line in file_one_cursor:
 	for line2 in file_two_cursor:
 	 	line_from_split2 = line2.split(",")
 	 	user_id2 = line_from_split2[0]
-        if user_id2 in entries_file_one[user_id]:
-        	if len(entries_file_one[user_id]) == 5:
-        		entries_file_one[user_id].extend(line_from_split2[1:])
-        		print entries_file_one[user_id]
-        		break
-        	break
+		if user_id2 in entries_file_one[user_id]:
+			if len(entries_file_one[user_id]) == 5:
+				entries_file_one[user_id].extend(line_from_split2[1:])
+    			print entries_file_one[user_id]
+    			break
+    		break
 
 
 	
