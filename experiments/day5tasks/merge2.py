@@ -22,8 +22,13 @@ for line in file_one_cursor:
 			if len(entries_file_one[user_id]) == 5:
 				entries_file_one[user_id].extend(line_from_split2[1:])
     			entries_list = entries_file_one[user_id]
-    			print entries_list
-    			file_three.write("%s\n"%entries_list)
+    			file_three.write("%s\t"%entries_list[0])
+    			file_three.write("%s\t"%entries_list[1])
+    			file_three.write("%s\t"%entries_list[2])
+    			file_three.write("%s\t"%entries_list[3])
+    			file_three.write("%s\t"%entries_list[4].rstrip("\n"))
+    			file_three.write("%s\t"%entries_list[5])
+    			file_three.write("%s"%entries_list[6])
     			break
     		break
 
