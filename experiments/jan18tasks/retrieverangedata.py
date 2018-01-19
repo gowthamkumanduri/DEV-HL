@@ -32,7 +32,7 @@ print keys
 for row_index in range(int(rowx),int(rowspawn)):
 	for col_index in range(int(colx),int(colspawn)):
 		d[keys[col_index]] = sheet.cell(row_index, col_index).value
-	dict_list.append(d)
+	dict_list.append(dict(d))
 
 print dict_list
 
