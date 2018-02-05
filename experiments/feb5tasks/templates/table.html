@@ -1,0 +1,26 @@
+<html>
+<head>
+<style>
+	table,th,td{
+	border : 1px solid red;
+	border-collapse: collapse;
+}
+</style>
+</head>
+<body>
+
+<table>
+<tr>
+	<th>Id</th><th>username</th><th>password</th>
+</tr>
+	{% for item in list1: %}
+		<tr>
+		{% for col in item: %}
+			<td>{{col}}</td>
+		{% endfor %}
+		</tr>
+	{% endfor %}
+
+</table>
+</body>
+</html>
