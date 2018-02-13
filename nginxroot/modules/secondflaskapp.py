@@ -3,13 +3,16 @@ from flask import request,render_template,redirect
 from flask_bootstrap import Bootstrap
 from modules import add,db,table
 import xlrd,xlwt
+from flask import send_from_directory
 import mysql.connector as md
 app = Flask(__name__)
 Bootstrap(app)
 file_path="/home/gowtham/Desktop/nginxroot/modules/comments.xlsx"
 output_book = xlwt.Workbook()
 output_sheet = output_book.add_sheet('data1')
-output_sheet.write("ID,USERNAME,EMAIL,FIRSTNAME,LASTNAME \n")
+style_string = "font: bold on; "
+style = xlwt.easyxf(style_string)
+output_sheet.write(0,0,"ID,USERNAME,EMAIL,FIRSTNAME,LASTNAME \n",style=style)
 conn = md.connect(user = 'root', password='password', host='localhost', database='testdb')
 cursor = conn.cursor()
 @app.route("/list",methods=['GET','POST'])
@@ -41,9 +44,9 @@ def form():
 					query = "SELECT * FROM deletedata WHERE ID=%s"
 					cursor.execute(query,data)
 					for row in cursor:
-						output_sheet.write("{0},{1},{2},{3},{4}\n".format(row[0],row[1],row[2],row[3],row[4]))
+						output_sheet.write(1,0,"{0},{1},{2},{3},{4}\n".format(row[0],row[1],row[2],row[3],row[4]),style=style)
         				output_book.save(file_path)
-        				return 'hi'
+        				return send_from_directory('file_path',as_attachment=True)
 		return "Please select either of DELETE or EXPORT OPTION"
 
 
