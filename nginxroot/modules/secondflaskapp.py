@@ -7,12 +7,18 @@ from flask import send_from_directory
 import mysql.connector as md
 app = Flask(__name__)
 Bootstrap(app)
-file_path="/home/gowtham/Desktop/nginxroot/modules/comments.xlsx"
+#file_path="/home/gowtham/Desktop/nginxroot/modules/comments.xls"
 output_book = xlwt.Workbook()
-output_sheet = output_book.add_sheet('data1')
-style_string = "font: bold on; "
+output_sheet = output_book.add_sheet('data1',cell_overwrite_ok=True)
+style_string = "font: bold on "
 style = xlwt.easyxf(style_string)
-output_sheet.write(0,0,"ID,USERNAME,EMAIL,FIRSTNAME,LASTNAME \n",style=style)
+header = ['ID','USERNAME','EMAIL','FIRSTNAME','LASTNAME']
+r=0
+c=0
+for val in header:
+	output_sheet.write(r,c,val)
+	c +=1
+
 conn = md.connect(user = 'root', password='password', host='localhost', database='testdb')
 cursor = conn.cursor()
 @app.route("/list",methods=['GET','POST'])
@@ -23,7 +29,7 @@ def form():
 		cursor.execute(sql)
 		for row in cursor:
 			list1.append(row)
-		print list1
+		#print list1
 		return render_template('selectform.html',list1=list1)	
 	else:
 		if request.form['methods']=='DELETE':
@@ -41,12 +47,21 @@ def form():
 			for k in request.form:
 				if k!='methods':
 					data.append(request.form[k])
+					print data
 					query = "SELECT * FROM deletedata WHERE ID=%s"
 					cursor.execute(query,data)
+					#print data
+					rn=1
 					for row in cursor:
-						output_sheet.write(1,0,"{0},{1},{2},{3},{4}\n".format(row[0],row[1],row[2],row[3],row[4]),style=style)
-        				output_book.save(file_path)
-        				return send_from_directory(file_path,as_attachment=True)
+						#print row
+						cn=0
+						for col in row:
+							#print col
+							output_sheet.write(rn,cn,col)
+							cn +=1
+						rn +=1
+        				output_book.save('/home/gowtham/Desktop/nginxroot/modules/comments.xls')
+        				return send_from_directory("/home/gowtham/Desktop/nginxroot/modules","comments.xls",as_attachment=True)
 		return "Please select either of DELETE or EXPORT OPTION"
 
 
