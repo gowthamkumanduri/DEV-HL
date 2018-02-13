@@ -9,7 +9,7 @@ Bootstrap(app)
 file_path="/home/gowtham/Desktop/nginxroot/modules/comments.xlsx"
 output_book = xlwt.Workbook()
 output_sheet = output_book.add_sheet('data1')
-#output_sheet.write("ID,USERNAME,EMAIL,FIRSTNAME,LASTNAME \n")
+output_sheet.write("ID,USERNAME,EMAIL,FIRSTNAME,LASTNAME \n")
 conn = md.connect(user = 'root', password='password', host='localhost', database='testdb')
 cursor = conn.cursor()
 @app.route("/list",methods=['GET','POST'])
