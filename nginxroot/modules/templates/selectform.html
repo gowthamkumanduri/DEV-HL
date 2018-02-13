@@ -1,0 +1,43 @@
+{% extends "bootstrap/base.html" %}
+{%block content%}
+<div class="container">
+<form class="form-inline" action="{{'http://127.0.0.1:5000/list'}}" method="POST">
+<div class="form-group">
+<label for="methods">Action:</label>
+<select class="form-control" id="methods" name="methods" style="width:120px">
+<option>-----------------</option>
+<option value="EXPORT">EXPORT</option>
+<option value="DELETE">DELETE</option>
+</select>
+<label for="methods"><input type="submit" value=Go></label>
+<a href="/add" class="btn btn-info" role="button">ADD USER</a>
+<table class="table table-striped" style="width: 100%">
+<thead>
+<tr>
+<th> </th>
+<th>ID</th>
+<th>USERNAME</th>
+<th>EMAILADDRESS</th>
+<th>FIRSTNAME</th>
+<th>LASTNAME</th>
+</tr>
+</thead>
+<tbody>
+{% for item in list1: %}
+		<tr>
+			<td>
+				<div class="checkbox">
+      <label><input type="checkbox" value= "{{ item[0] }}" name="test_{{item[0]}}"></label>
+    </div>
+			</td>
+		{% for col in item: %}
+			<td>{{col}}</td>
+		{% endfor %}
+		
+		</tr>
+	{% endfor %}
+</tbody>
+</table>
+</div>
+</form>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "bootstrap/base.html" %}
+{% block head %}
+
+<style>
+	.input {
+ 	margin-right: 5%;
+ 	float:left;
+ 	width: 8%;
+ }
+.mgr{
+	margin-bottom: 2%;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+<form action="/application" method="POST">
+<div class="form-group mgr">
+  {% if 'Firstname' in error %}
+  <p style="color:red;"> * required </p>
+  {% endif %}
+<label for="fn" class="input">Firstname:</label>
+
+  <input type="text" name="Firstname" class="form-control" id="fn">
+  
+ </div>
+
+<div class="form-group mgr">
+<label for="ln" class="input">Lastname:</label>
+  <input type="text" name="Lastname" class="form-control" id="ln" >
+ </div>
+
+<div class="form-group mgr">
+  {% if 'Salary' in error %}
+  <p style="color:red;"> * required </p>
+  {% endif %}
+<label for="sa" class="input">Salary:</label>
+  <input type="text" name="Salary" class="form-control" id="sa" >
+ </div>
+
+<div class="form-group mgr">
+  {% if 'Companyname' in error %}
+  <p style="color:red;"> * required </p>
+  {% endif %}
+<label for="cn" class="input">Companyname:</label>
+  <input type="text" name="Companyname" class="form-control" id="cn" >
+ </div>
+
+<div class="form-group mgr">
+<label for="tn" class="input">Tenure:</label>
+  <input type="text" name="Tenure" class="form-control" id="tn" >
+ </div>
+
+ <div class="form-group mgr">
+  {% if 'Loanamount' in error %}
+  <p style="color:red;"> * required </p>
+  {% endif %}
+<label for="la" class="input">Loanamount:</label>
+  <input type="text" name="Loanamount" class="form-control" id="la" >
+ </div>
+
+<div class="form-group mgr">
+  {% if 'Pincode' in error %}
+  <p style="color:red;"> * required </p>
+  {% endif %}
+<label for="pi" class="input">Pincode:</label>
+  <input type="text" name="Pincode" class="form-control" id="pi" >
+ </div>
+
+ <div class="form-group mgr">
+   {% if 'Phone' in error %}
+  <p style="color:red;"> * required </p>
+  {% endif %}
+<label for="ph" class="input">Phone:</label>
+  <input type="text" name="Phone" class="form-control" id="ph" >
+
+ </div>
+
+ <div class="form-group mgr">
+<label for="Em" class="input">Email:</label>
+  <input type="text" name="Email" class="form-control" id="Em" >
+ </div>
+<input type="submit" value="submit">
+</form>
+</div>
+{% endblock %}

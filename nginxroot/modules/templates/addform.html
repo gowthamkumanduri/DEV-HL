@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+<style>
+	form {
+		margin-left: 5%;
+	}
+</style>
+</head>
+<body>
+<form action="{{'http://127.0.0.1:5000/loanapplication'}}" method='POST'>
+ User:
+ <input type="text" name="User" placeholder="--------" style="margin-left: 15%" size="20">
+<!--<img src="/home/gowtham/Downloads/edit.png" alt="user">--><br><br>
+ Loancat:
+ <input type="text" name="Loancat" placeholder="--------" style="margin-left: 13%" size="25"><br><br>
+ Firstname:
+ <input type="text" name="Firstname" style="margin-left: 12%" size="30"><br><br>
+ Lastname:
+ <input type="text" name="Lastname" style="margin-left: 12.2%" size="30"><br><br>
+ Middlename:
+ <input type="text" name="Middlename" style="margin-left: 10.7%" size="30"><br><br>
+ Dob:
+ <input type="date" name="Dob" style="margin-left: 15.4%"><br><br>
+ Gender:
+ <input list ="Gender" name="Gender" style="margin-left: 13.8%" placeholder="------------" size="8">
+ <datalist id = 'Gender'>
+    <option value="Male">
+    <option value="Female">
+    <option value="other"></datalist><br><br>
+ State:
+ <input type="text" name="State" style="margin-left: 15.3%" size="30"><br><br>
+ City:
+ <input type="text" name="City" style="margin-left: 15.5%" size="30"><br><br>
+ Pincode:
+ <input type="text" name="Pincode" style="margin-left: 13.5%" size="30"><br><br>
+ Address:
+ <textarea name="Address" rows="10" cols="70" style="margin-left: 13.5%"></textarea><br><br>
+ Pannumber:
+ <input type="text" name="Pannumber" style="margin-left: 11.5%" size="30"><br><br>
+ Nonlistedcompanyname:
+ <input type="text" name="Nonlistedcompanyname" style="margin-left: 4%" size="30"><br><br>
+ <input type="submit" value="submit">
+</form>
+</body>
+</html>
