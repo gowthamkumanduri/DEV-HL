@@ -2,12 +2,13 @@ from flask import Flask
 from flask import request,render_template,redirect
 from flask_bootstrap import Bootstrap
 from modules import add,db,table
-import xlrd,xlwt
+import xlrd,xlwt,requests
 from flask import send_from_directory
 import mysql.connector as md
 app = Flask(__name__)
 Bootstrap(app)
-#file_path="/home/gowtham/Desktop/nginxroot/modules/comments.xls"
+app.config['DIR_LOCATION'] = '/home/gowtham/Desktop/nginxroot/modules'
+file_path= app.config['DIR_LOCATION']+'gowthamdata.xls'
 output_book = xlwt.Workbook()
 output_sheet = output_book.add_sheet('data1',cell_overwrite_ok=True)
 style_string = "font: bold on "
@@ -21,6 +22,17 @@ for val in header:
 
 conn = md.connect(user = 'root', password='password', host='localhost', database='testdb')
 cursor = conn.cursor()
+def write_to_file(cursor):
+	rn=1
+	for row in cursor:
+		cn=0    		
+		for col in row:
+		#print col
+			output_sheet.write(rn,cn,col)
+			cn +=1
+		rn +=1
+		output_book.save(file_path)
+
 @app.route("/list",methods=['GET','POST'])
 def form():
 	if request.method=='GET':
@@ -50,19 +62,9 @@ def form():
 					print data
 					query = "SELECT * FROM deletedata WHERE ID=%s"
 					cursor.execute(query,data)
-					#print data
-					rn=1
-					for row in cursor:
-						#print row
-						cn=0
-						for col in row:
-							#print col
-							output_sheet.write(rn,cn,col)
-							cn +=1
-						rn +=1
-        				output_book.save('/home/gowtham/Desktop/nginxroot/modules/comments.xls')
-        				return send_from_directory("/home/gowtham/Desktop/nginxroot/modules","comments.xls",as_attachment=True)
-		return "Please select either of DELETE or EXPORT OPTION"
+					write_to_file(cursor)
+					return send_from_directory(app.config['DIR_LOCATION'],"gowthamdata.xls",as_attachment=True)
+    	return "Please select either of DELETE or EXPORT OPTION"
 
 
 
