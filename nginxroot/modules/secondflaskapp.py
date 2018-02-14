@@ -73,21 +73,17 @@ def form():
 			conn.commit()
 			return redirect("http://127.0.0.1:5000/list")
 		elif request.form['methods']=='UPDATEASCALLED':
-			data1=[]
 			for k in request.form:
 				if k!='methods':
-					data1.append(request.form[k])
-					query= "INSERT INTO APPLICATIONEVENTS(APPID,STATUS,COMMENT) VALUES(%s,'Called','good')"
-					cursor.execute(query,data1)
+					query= "INSERT INTO APPLICATIONEVENTS(APPID,STATUS,COMMENT) VALUES({0},'Called','good')".format(request.form[k])
+					cursor.execute(query)
 					conn.commit()
 			return tableop()
 		elif request.form['methods']=='UPDATEASNOTINTERESTED':
-			data2=[]
 			for k in request.form:
 				if k!='methods':
-					data2.append(request.form[k])
-					query= "INSERT INTO APPLICATIONEVENTS(APPID,STATUS,COMMENT) VALUES(%s,'NotInterested','good')"
-					cursor.execute(query,data2)
+					query= "INSERT INTO APPLICATIONEVENTS(APPID,STATUS,COMMENT) VALUES({0},'NotInterested','good')".format(request.form[k])
+					cursor.execute(query)
 					conn.commit()
 			return tableop()
 		elif request.form['methods']=='EXPORT':
