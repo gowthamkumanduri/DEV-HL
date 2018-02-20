@@ -1,0 +1,23 @@
+{% extends "bootstrap/base.html" %}
+{%block content%}
+
+<div class="container">
+<form action="{{'http://127.0.0.1:5000/login'}}" class = "form-inline" method="POST">
+<div class="form-group">
+  {% if 'username' in error %}
+  <p style="color:red;"> * required </p>
+  {% endif %}
+<label for="fn">username:</label>
+  <input type="text" name="username" class="form-control" id="fn">
+ </div>
+ <div class="form-group">
+  {% if 'password' in error %}
+  <p style="color:red;"> * required </p>
+  {% endif %}
+<label for="ps">password:</label>
+  <input type="password" name="password" class="form-control" id="ps">
+ </div>
+ <input type="submit" value="submit">
+</form>
+</div>
+{% endblock %}

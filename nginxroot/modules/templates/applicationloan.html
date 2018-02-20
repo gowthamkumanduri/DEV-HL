@@ -1,0 +1,129 @@
+{% extends "bootstrap/base.html" %}
+{% block head %}
+
+<style>
+	.input {
+ 	margin-right: 5%;
+ 	float:left;
+ 	width: 8%;
+ }
+.mgr{
+	margin-bottom: 2%;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div style="display: inline-block; float: right; margin-top: 20px; margin-right: 30px;">
+    <form action="http://127.0.0.1:5000/logout" method="GET">
+        <input type="submit" value="logout">
+    </form>
+</div>
+<div class="container" style="display: inline-block;margin-left: 5%;margin-top: 3%;">
+
+
+<div>
+  <form action="/applicationloan" method="POST">
+  <div class="loan-header"><h2>Application Loan Form</h2></div>
+  <table>
+    <tr>
+      <td>User ID : </td>
+      <td><input type="text" name="userid" class="form-control" id="id"></td>
+      <td>
+        {% if 'userid' in error %}
+        <p style="color:red;"> * required </p>
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>First name : </td>
+      <td><input type="text" name="firstname" class="form-control" id="fn"></td>
+      <td>
+        {% if 'firstname' in error %}
+        <p style="color:red;"> * required </p>
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>Last name : </td>
+      <td><input type="text" name="lastname" class="form-control" id="fn"></td>
+      <td>
+        {% if 'lastname' in error %}
+          <p style="color:red;"> * required </p>
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>Salary : </td>
+      <td><input type="text" name="salary" class="form-control" id="sa" ></td>
+      <td>
+        {% if 'salary' in error %}
+        <p style="color:red;"> * required </p>
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>Company : </td>
+      <td><input type="text" name="company" class="form-control" id="cn" ></td>
+      <td>
+        {% if 'company' in error %}
+        <p style="color:red;"> * required </p>
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="submit" value="submit"></td>
+      <td></td>
+    </tr>
+  </table>
+  </form>
+</div>
+
+<!--
+<div class="form-group mgr">
+  {% if 'userid' in error %}
+  <p style="color:red;"> * required </p>
+  {% endif %}
+<label for="id" class="input">userid:</label>
+
+  <input type="text" name="userid" class="form-control" id="id">
+  
+ </div>
+<div class="form-group mgr">
+{% if 'firstname' in error %}
+  <p style="color:red;"> * required </p>
+  {% endif %}
+<label for="fn" class="input">firstname:</label>
+
+  <input type="text" name="firstname" class="form-control" id="fn">
+  
+ </div>
+<div class="form-group mgr">
+{% if 'lastname' in error %}
+  <p style="color:red;"> * required </p>
+  {% endif %} 
+<div class="form-group mgr">
+<label for="ln" class="input">lastname:</label>
+  <input type="text" name="lastname" class="form-control" id="ln" >
+ </div>
+
+<div class="form-group mgr">
+  {% if 'salary' in error %}
+  <p style="color:red;"> * required </p>
+  {% endif %}
+<label for="sa" class="input">salary:</label>
+  <input type="text" name="salary" class="form-control" id="sa" >
+ </div>
+
+<div class="form-group mgr">
+  {% if 'company' in error %}
+  <p style="color:red;"> * required </p>
+  {% endif %}
+<label for="cn" class="input">company:</label>
+  <input type="text" name="company" class="form-control" id="cn" >
+ </div>
+
+<input type="submit" value="submit"> -->
+
+</div>
+{% endblock %}
