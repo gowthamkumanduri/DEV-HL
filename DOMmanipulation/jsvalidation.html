@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<form name ="validateform" onsubmit="return submitform();">
+<table>
+<tr>
+<td><label>Firstname:</label></td>
+<td><input type="text" name="firstname"></td>
+<td><p id="fname"></p></td>
+</tr>
+<tr>
+<td><label>Lastname:</label></td>
+<td><input type="text" name="lastname" ></td>
+<td><p id="lname"></p></td>
+</tr>
+<tr>
+<td><label>Email:</label></td>
+<td><input type="email" name="email" ></td>
+<td><p id="mail"></p></td>
+</tr>
+<tr>
+<td><label>Phone:</label></td>
+<td><input type="number" name="phone" ></td>
+<td><p id="cell"></p></td>
+</tr>
+<tr>
+<td><label>Pannumber:</label></td>
+<td><input type="number" name="pannumber" ></td>
+<td><p id="pan"></p></td>
+</tr>
+<tr>
+<td><label>Loanamount:</label></td>
+<td><input type="number" name="amount" ></td>
+<td><p id="loan"></p></td>
+</tr>
+<tr>
+<td><label>Tenure:</label></td>
+<td><input type="number" name="tenure" ></td>
+<td><p id="emi"></p></td>
+</tr>
+<tr>
+<td><input type="submit" id="submit" value="submit" ></td>
+</tr>
+</table>
+</form>
+<script>
+function submitform(){
+var firstname = document.validateform.firstname;
+var lastname  = document.validateform.lastname;
+var email     = document.validateform.email;
+var phone     = document.validateform.phone;
+var pannumber = document.validateform.pannumber;
+var loanamount= document.validateform.loanamount;
+var tenure    = document.validateform.tenure;
+
+if (firstname.value == '')
+{
+    document.getElementById('fname').innerHTML = "*required";
+    return false;
+    }
+else if (lastname.value == '')
+{
+    document.getElementById('lname').innerHTML = "*required";
+    return false;
+}
+else if (email.value == '')
+{
+    document.getElementById('mail').innerHTML = "*required";
+    return false;
+}
+else if (phone.value == '')
+{
+    document.getElementById('cell').innerHTML = "*required";
+    return false;
+}
+else if (pannumber.value == '')
+{
+    document.getElementById('pan').innerHTML = "*required";
+    return false;
+}
+else if (loanamount.value == '')
+{
+    document.getElementById('loan').innerHTML = "*required";
+    return false;
+}
+else (tenure.value == '')
+{
+    document.getElementById('emi').innerHTML = "*required";
+    return false;
+}
+
+return true;
+}           
+</script>
+</body>
+</html>
