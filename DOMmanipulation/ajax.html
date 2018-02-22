@@ -1,0 +1,21 @@
+var httpRequest = new XMLHttpRequest();
+
+httpRequest.onreadystatechange = function processDate(){
+    console.log("readStatus",httpRequest.readyState);
+    console.log("status",httpRequest.status);
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        if (httpRequest.status === 200) {
+        console.log(httpRequest.responseText);
+        document.getElementById("content").innerHTML=httpRequest.responseText;
+      } else {
+        alert('There was a problem with the request.');
+      }
+    }
+    
+    
+};
+
+//console.log("I am in ");
+
+httpRequest.open('GET', 'http://127.0.0.1:5000/login');
+httpRequest.send();

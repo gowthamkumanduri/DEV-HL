@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <form name ="validateform" onsubmit="return submitform();">
+            <table>
+                <tr>
+                    <td><label>Firstname:</label></td>
+                    <td><input type="text" name="firstname"></td>
+                    <td id = 'one'></td>
+                </tr>
+                <tr>
+                    <td><label>Lastname:</label></td>
+                    <td><input type="text" name="lastname" ></td>
+                    <td id = 'two'></td>
+                </tr>
+                <tr>
+                    <td><label>Email:</label></td>
+                    <td><input type="email" name="email" ></td>
+                    <td id = 'three'></td>
+                </tr>
+                <tr>
+                    <td><label>Phone:</label></td>
+                    <td><input type="number" name="phone" ></td>
+                    <td id = 'four'></td>
+                </tr>
+                <tr>
+                    <td><label>Pannumber:</label></td>
+                    <td><input type="number" name="pannumber" ></td>
+                    <td id = 'five'></td>
+                </tr>
+                <tr>
+                    <td><label>Loanamount:</label></td>
+                    <td><input type="number" name="amount" ></td>
+                    <td id = 'six'></td>
+                </tr>
+                <tr>
+                    <td><label>Tenure:</label></td>
+                    <td><input type="number" name="tenure" ></td>
+                    <td id = 'seven'></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" id="submit" value="submit" ></td>
+                </tr>
+                </table>
+            </form>
+<script>
+    a=0;
+    b=0;
+    c=0;
+    d=0;
+    e=0;
+    f=0;
+    g=0;
+    function submitform(){
+        var isValid = true;
+        var firstname = document.validateform.firstname;
+        var lastname  = document.validateform.lastname;
+        var email     = document.validateform.email;
+        var phone     = document.validateform.phone;
+        var pannumber = document.validateform.pannumber;
+        var loanamount= document.validateform.amount;
+        var tenure    = document.validateform.tenure;
+
+        if (firstname.value == ''){  
+            if (a==0){   
+            var paragraph = document.createElement("P");
+            paragraph.setAttribute("id","fname");
+            document.getElementById('one').appendChild(paragraph)
+            document.getElementById('fname').innerHTML = "*required";
+            a+=1;
+            isValid=false;
+            }
+            
+            }
+        else{
+            document.getElementById('fname').innerHTML = "";
+        }
+        if (lastname.value == ''){
+            if (b==0){
+            var paragraph = document.createElement("P");
+            paragraph.setAttribute("id","lname");
+            document.getElementById('two').appendChild(paragraph)
+            document.getElementById('lname').innerHTML = "*required";
+            b+=1;
+            }
+            isValid=false;
+        }
+        else{
+            document.getElementById('lname').innerHTML = "";
+        }
+        if (email.value == ''){
+            if (c==0){
+            var paragraph = document.createElement("P");
+            paragraph.setAttribute("id","mail");
+            document.getElementById('three').appendChild(paragraph)
+            document.getElementById('mail').innerHTML = "*required";
+            c+=1;
+            }
+            isValid=false;
+        }
+        else{
+            document.getElementById('mail').innerHTML = "";
+        }
+        if (phone.value == ''){
+            if (d==0){
+            var paragraph = document.createElement("P");
+            paragraph.setAttribute("id","cell");
+            document.getElementById('four').appendChild(paragraph)
+            document.getElementById('cell').innerHTML = "*required";
+            d+=1;
+            }
+            isValid=false;
+        }
+        else{
+            document.getElementById('cell').innerHTML = "";
+        }
+        if (pannumber.value == ''){
+            if (e==0){
+            var paragraph = document.createElement("P");
+            paragraph.setAttribute("id","pan");
+            document.getElementById('five').appendChild(paragraph)
+            document.getElementById('pan').innerHTML = "*required";
+            e+=1;
+            }
+            isValid=false;
+        }
+        else{
+            document.getElementById('pan').innerHTML = "";
+        }
+        if (loanamount.value == ''){
+            if (f==0){
+            var paragraph = document.createElement("P");
+            paragraph.setAttribute("id","loan");
+            document.getElementById('six').appendChild(paragraph)
+            document.getElementById('loan').innerHTML = "*required";
+            f+=1;
+            }
+            isValid=false;
+        }
+        else{
+            document.getElementById('loan').innerHTML = "";
+        }
+        if (tenure.value == ''){
+            if (g==0){
+            var paragraph = document.createElement("P");
+            paragraph.setAttribute("id","emi");
+            document.getElementById('seven').appendChild(paragraph)
+            document.getElementById('emi').innerHTML = "*required";
+            g+=1;
+            }
+            isValid=false;
+        }
+        else{
+            document.getElementById('emi').innerHTML = "";
+        }
+
+        return isValid;
+}           
+</script>
+</body>
+</html>
