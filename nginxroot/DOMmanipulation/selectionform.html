@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<form  action="{{'http://127.0.0.1:5000/selection'}}" >
+			<label for="methods">Action:</label>
+			<select  id="methods" name="methods" style="width:120px">
+				<option>-----------------</option>
+				<option value="DELETE">DELETE</option>
+			</select>
+			<label><input type="submit" value=Go></label>
+			<table style="width: 100%">
+				<thead>
+					<tr>
+						<th> </th>
+						<th>ID</th>
+						<th>FIRSTNAME</th>
+						<th>LASTNAME</th>
+						<th>EMAIL</th>
+					</tr>
+				</thead>
+				<tbody>
+					for item in list1:
+						<tr>
+							<td>
+								<div class="checkbox">
+									<label><input type="checkbox" value= "item[0]" name="test_item[0]"></label>
+								</div>
+							</td>
+						for col in item:
+							<td>col</td>
+						</tr>
+				</tbody>
+			</table>
+		</form>
+	</body>
+</html>
+
+	

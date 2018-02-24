@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <form name="validateform" id='myForm'>
+            <table>
+                <tr>
+                    <td><label>Firstname:</label></td>
+                    <td><input type="text" name="firstname"></td>
+                    <td id="fname"></td>
+                </tr>
+                <tr>
+                    <td><label>Lastname:</label></td>
+                    <td><input type="text" name="lastname" ></td>
+                    <td id='lname'></td>
+                </tr>
+                <tr>
+                    <td><label>Email:</label></td>
+                    <td><input type="email" name="email" ></td>
+                    <td id="mail"></td>
+                </tr>
+                <tr>
+                    <td><label>Phone:</label></td>
+                    <td><input type="number" name="phone" ></td>
+                    <td id="cell"></td>
+                </tr>
+                <tr>
+                    <td><label>Pannumber:</label></td>
+                    <td><input type="number" name="pannumber" ></td>
+                    <td id="pan"></td>
+                </tr>
+                <tr>
+                    <td><label>Loanamount:</label></td>
+                    <td><input type="number" name="amount" ></td>
+                    <td id="loan"></td>
+                </tr>
+                <tr>
+                    <td><label>Tenure:</label></td>
+                    <td><input type="number" name="tenure" ></td>
+                    <td id="emi"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" id="submit" value="submit" ></td>
+                </tr>
+            </table>
+        </form>
+        <button id="button">get login page</button>
+        <div id="content"></div>
+        <script>
+            function submitform(){
+                var isValid = true;
+                var firstname = document.validateform.firstname;
+                var lastname  = document.validateform.lastname;
+                var email     = document.validateform.email;
+                var phone     = document.validateform.phone;
+                var pannumber = document.validateform.pannumber;
+                var loanamount= document.validateform.amount;
+                var tenure    = document.validateform.tenure;
+
+                if (firstname.value == ''){
+                    document.getElementById('fname').innerHTML = "*required";
+                    isValid=false;
+                }else{
+                    document.getElementById('fname').innerHTML = "";
+                }
+                if (lastname.value == '')
+                {
+                    document.getElementById('lname').innerHTML = "*required";
+                    isValid=false;   
+                }else{
+                    document.getElementById('lname').innerHTML = "";
+                }
+                if (email.value == '')
+                {
+                    document.getElementById('mail').innerHTML = "*required";
+                    isValid=false;    
+                }else{
+                    document.getElementById('mail').innerHTML = "";
+                }
+                if (phone.value == '')
+                {
+                    document.getElementById('cell').innerHTML = "*required";
+                    isValid=false;
+                    
+                }else{
+                    document.getElementById('cell').innerHTML = "";
+                }
+
+                if (pannumber.value == '')
+                {
+                    document.getElementById('pan').innerHTML = "*required";
+                    isValid=false;
+                }else{
+                    document.getElementById('pan').innerHTML = "";
+                }
+                if (loanamount.value == '')
+                {
+                    document.getElementById('loan').innerHTML = "*required";
+                    isValid=false;
+                }else{
+                    document.getElementById('loan').innerHTML = "";
+                }
+                if (tenure.value == '')
+                {
+                    document.getElementById('emi').innerHTML = "*required";
+                    isValid=false;
+                }else{
+                    document.getElementById('emi').innerHTML = "";
+                }
+
+                return isValid;
+            }
+            
+            document.getElementById('myForm').addEventListener('submit',processDate);
+                
+            function processDate(){
+                var httpRequest = new XMLHttpRequest();
+                httpRequest.open('GET','http://127.0.0.1:5000/login',true);
+                
+                httpRequest.onreadystatechange = function(){
+                    //console.log("readystate",httpRequest.readyState);
+                    //console.log("status",httpRequest.status);
+                    //console.log("hii");
+                    if (this.readyState === 4){ 
+                        if(this.status === 200){
+                        console.log(this.responseText);
+                        document.getElementById("content").innerHTML=httpRequest.responseText;
+                        }
+                    }
+                }
+                httpRequest.send();
+            }              
+        </script>
+    </body>
+</html>
