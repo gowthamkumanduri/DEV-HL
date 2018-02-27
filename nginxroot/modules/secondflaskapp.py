@@ -5,8 +5,11 @@ from modules import add,db,table
 import xlrd,xlwt,requests
 from flask import send_from_directory
 import mysql.connector as md
+from flask_cors import CORS
+
 app = Flask(__name__)
 Bootstrap(app)
+CORS(app)
 app.config['DIR_LOCATION'] = '/home/gowtham/Desktop/nginxroot/modules/'
 
 file_path= app.config['DIR_LOCATION']+'gowthamdata.xls'
@@ -54,12 +57,14 @@ def tableop():
 def form():
 	if request.method=='GET':
 		list1 = []
-		sql="SELECT * FROM deletedata"
+		sql="SELECT * FROM userdetails"
 		cursor.execute(sql)
 		for row in cursor:
 			list1.append(row)
 		#print list1
-		return render_template('selectform.html',list1=list1)	
+		count=len(list1)
+		X=0
+		return render_template('deleterow.html',list1=list1)	
 	else:
 		if request.form['methods']=='DELETE':
 			ids=[]
@@ -67,7 +72,7 @@ def form():
 				if k!='methods':
 					ids.append(request.form[k])
 					#print ids
-			query = "DELETE FROM deletedata WHERE id IN ({0})".format(','.join(ids))
+			query = "DELETE FROM userdetails WHERE id IN ({0})".format(','.join(ids))
 			print query
 			cursor.execute(query)
 			conn.commit()
@@ -101,9 +106,28 @@ def form():
 
 
 
-
 	
 
 @app.route("/add")
 def adduser():
-	return add()	
+	return add()
+
+
+@app.route('/delete',methods=['GET','POST'])
+def html():
+	if request.method=='GET':
+		methods = request.args.get('methods')
+		userid  = request.args.getlist('text')
+		print type(userid)
+		print methods
+		if methods =='DELETE':
+			query = "DELETE FROM userdetails WHERE id IN ({0})".format(','.join(userid))
+			cursor.execute(query)
+			print query
+			conn.commit()
+			list1 = []
+			sql="SELECT * FROM userdetails"
+			cursor.execute(sql)
+			for row in cursor:
+				list1.append(row)
+			return render_template("deleterow.html",list1=list1)

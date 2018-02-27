@@ -1,0 +1,58 @@
+{% extends "bootstrap/base.html" %}
+
+{%block content%}
+<div class="container">
+
+<form class="form-inline" id="myForm">
+<div class="form-group">
+
+<label for="methods">Action:</label>
+
+<select class="form-control" id="methods" name="methods" style="width:120px">
+
+<option>-----------------</option>
+<option value="DELETE">DELETE</option>
+</select>
+
+<table class="table table-striped" style="width: 100%">
+
+<thead>
+<tr>
+<th> </th>
+<th>ID</th>
+<th>FIRSTNAME</th>
+<th>LASTNAME</th>
+<th>EMAIL</th>
+</tr>
+
+</thead>
+<tbody>
+
+
+{% for item in list1: %}
+	<tr>
+		<td>
+			<div id="checkbox" class="checkbox">
+      			<input class="messageCheckbox" type="checkbox" value= "{{ item[0] }}" name="text">
+    		</div>
+		</td>
+	{% for col in item: %}
+		<td id="value">{{col}}</td>
+	{% endfor %}	
+	</tr>
+{% endfor %}
+
+	
+
+</tbody>
+</table>
+<label for="methods"><input type="submit" id ='click' value=Go></label>
+</div>
+</form>
+
+<div id ="content"></div>
+{% block javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='myscript.js') }}"></script>
+{% endblock %}
+{% endblock %}

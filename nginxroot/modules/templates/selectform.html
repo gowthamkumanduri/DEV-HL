@@ -1,7 +1,7 @@
 {% extends "bootstrap/base.html" %}
 {%block content%}
 <div class="container">
-<form class="form-inline" action="{{'http://127.0.0.1:5000/list'}}" method="POST">
+<form class="form-inline" action="{{'http://127.0.0.1:5000/list'}}"  method="POST">
 <div class="form-group">
 <label for="methods">Action:</label>
 <select class="form-control" id="methods" name="methods" style="width:120px">
@@ -11,7 +11,7 @@
 <option value="UPDATEASCALLED">UPDATEASCALLED</option>
 <option value="UPDATEASNOTINTERESTED">UPDATEASNOTINTERESTED</option>
 </select>
-<label for="methods"><input type="submit" value=Go></label>
+<label for="methods"><input type="submit" id ='click' value=Go></label>
 <a href="/add" class="btn btn-info" role="button">ADD USER</a>
 <table class="table table-striped" style="width: 100%">
 <thead>

@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <form id="myform" action="/action_page.php">
+        <fieldset>
+          <legend>Personal information:</legend>
+          First name:<br>
+          <input type="text" name="firstname" value="Mickey"><br>
+          Last name:<br>
+          <input type="text" name="lastname" value="Mouse"><br><br>
+          <input type="submit" value="Submit">
+        </fieldset>
+      </form>
+    <script>
+        $( document ).ready(function(){
+            var formData = $("#myform").serializeArray();
+            for( i=0;i<formData.length;i++){
+                console.log(formData[i].name,formData[i].value); 
+            }
+
+            $.ajax({
+                method:"GET",
+                url:"https://www.booknomads.com/api/v0/isbn/9789000035526"
+            }).done(function(data){
+                console.log("Response",data);
+            });;
+        });
+    </script>
+</html>

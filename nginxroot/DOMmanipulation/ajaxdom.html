@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
+    
     </head>
     <body>
-        <form name="validateform" id='myForm'>
+        <form name="validateform" id='myForm' onsubmit="return preventdefault()">
             <table>
                 <tr>
                     <td><label>Firstname:</label></td>
@@ -49,21 +50,27 @@
         <div id="content"></div>
         <script>
             document.getElementById('myForm').addEventListener('submit',processDate);
-            function processDate(){
+            function processDate(){ 
                 var httpRequest = new XMLHttpRequest();
                 httpRequest.open('GET','http://127.0.0.1:5000/login',true);
+                console.log("hii on ready");
                 httpRequest.onreadystatechange = function(){
                     //console.log("readystate",httpRequest.readyState);
                     //console.log("status",httpRequest.status);
-                    //console.log("hii");
+                    console.log("before if");
                     if (this.readyState === 4){
                         if(this.status === 200){
-                            console.log(this.responseText);
-                            document.getElementById("content").innerHTML=httpRequest.responseText;
+                            //console.log(this.responseText);
+                            //document.getElementById("content").innerHTML=httpRequest.responseText;
+                            
                         }
                     }
                 }
                 httpRequest.send();
+            }
+            function preventdefault(){
+                console.log("prevent");
+                return false;
             }
         </script>
     </body>

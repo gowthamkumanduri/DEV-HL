@@ -3,7 +3,10 @@ from flask import request,render_template,redirect,session,url_for
 import requests
 from flask_bootstrap import Bootstrap
 import mysql.connector as md
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)
 Bootstrap(app)
 conn = md.connect(user = 'root',password = 'password',host='localhost', database = 'testdb')
 cursor = conn.cursor()
@@ -78,6 +81,7 @@ def history():
 		if session['users'] == '' : 
 			return redirect("http://127.0.0.1:5000/login")
  	except:
+ 		#print "History API Start"
  		return redirect("http://127.0.0.1:5000/login")
 
 	sql = "SELECT *  from applicationloan where userid={0}".format(session['users'][0])
@@ -87,7 +91,6 @@ def history():
 		list1.append(row)
 	print list1
 	return render_template('history.html',list1=list1)
-	
 	
 	
 @app.route("/applicationloan", methods=['GET','POST'])
@@ -121,7 +124,18 @@ def applicationloan():
 			return render_template('applicationloan.html',error=result[0])
 					
 
-
+@app.route('/logout')
+def logout():
+	print "logout = "
+	print session
+	if len(session) != 0 :
+		if session['users'] != '' :
+			session['users'] = ''
+			print session
+			print "delete session and redirect login"
+	else :
+		print 'Empty session'
+	return redirect("http://127.0.0.1:5000/login")
 
 
 if __name__ == '__main__':
