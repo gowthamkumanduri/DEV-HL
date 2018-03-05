@@ -51,6 +51,19 @@ def tableop():
 	html = html + "</table>"
 	return "<html><body>"+html+"</body></html>"
 
+def table_op():
+	cursor.execute("SELECT * FROM userevents")
+	html = "<table style = 'border: 1px solid black;'><tr><th style = 'border: 1px solid black;border-collapse: collapse;'>APPID</th><th style = 'border: 1px solid black;border-collapse: collapse;'>STATUS</th><th style = 'border: 1px solid black;border-collapse: collapse;'>COMMENT</th></tr>"
+	for row in cursor:
+		#print type(row)
+		html = html + "<tr>"
+		for col in row:
+			html=html + "<td style = 'border: 1px solid black;border-collapse: collapse;'>" +str(col)+ "</td>"
+		html= html + "</tr>"
+	html = html + "</table>"
+	return "<html><body>"+html+"</body></html>"
+
+
 
 
 @app.route("/list",methods=['GET','POST'])
@@ -62,12 +75,10 @@ def form():
 		for row in cursor:
 			list1.append(row)
 		#print list1
-		count=len(list1)
-		X=0
 		return render_template('deleterow.html',list1=list1)	
 	else:
 		if request.form['methods']=='DELETE':
-			ids=[]
+			
 			for k in request.form:
 				if k!='methods':
 					ids.append(request.form[k])
@@ -80,7 +91,9 @@ def form():
 		elif request.form['methods']=='UPDATEASCALLED':
 			for k in request.form:
 				if k!='methods':
+					print request.form[k]
 					query= "INSERT INTO APPLICATIONEVENTS(APPID,STATUS,COMMENT) VALUES({0},'Called','good')".format(request.form[k])
+					print query
 					cursor.execute(query)
 					conn.commit()
 			return tableop()
@@ -113,14 +126,14 @@ def adduser():
 	return add()
 
 
-@app.route('/delete',methods=['GET','POST'])
+@app.route('/delete',methods=['GET'])
 def html():
 	if request.method=='GET':
 		methods = request.args.get('methods')
 		userid  = request.args.getlist('text')
 		print type(userid)
 		print methods
-		if methods =='DELETE':
+		if request.args.get('methods') =='DELETE':
 			query = "DELETE FROM userdetails WHERE id IN ({0})".format(','.join(userid))
 			cursor.execute(query)
 			print query
@@ -131,3 +144,17 @@ def html():
 			for row in cursor:
 				list1.append(row)
 			return render_template("deleterow.html",list1=list1)
+
+		elif request.args.get('methods') =='UPDATEASCALLED':
+			#format_strings = ','.join(['%s'] * len(userid))
+			query= "INSERT INTO userevents(APPID,STATUS,COMMENT) VALUES({0},'Called','good')".format(','.join(userid))
+			print query
+			cursor.execute(query)
+			conn.commit()
+			return table_op()
+
+		elif request.args.get('methods') =="UPDATEASNOTINTERESTED":
+			query = "INSERT INTO userevents(APPID,STATUS,COMMENT) VALUES({0},'NotInterested','good')".format(','.join(userid))
+			cursor.execute(query)
+			conn.commit()
+			return table_op()

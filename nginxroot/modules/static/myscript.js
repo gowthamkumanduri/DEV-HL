@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$( "form" ).on( "submit", function( event ) {
+	$( ".form1" ).on( "submit", function( event ) {
 		event.preventDefault();
 		var formData = $( this ).serialize();
 		console.log(formData)
@@ -9,7 +9,7 @@ $(document).ready(function(){
 	        url:str
 	    }).done(function(data) {
 	        console.log("Response",data);
-	 		$(".container").html(data)   
+	 		$("#content").html(data)   
 	    });;
 	});
 });	

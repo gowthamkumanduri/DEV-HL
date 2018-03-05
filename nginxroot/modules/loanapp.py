@@ -73,7 +73,7 @@ def login():
 			return render_template('login.html',error = result[0])
 	
 		
-@app.route("/history", methods = ['GET','POST'])
+@app.route("/history", methods = ['GET'])
 def history():
 	print "History API Start"
 	try:
@@ -84,13 +84,15 @@ def history():
  		#print "History API Start"
  		return redirect("http://127.0.0.1:5000/login")
 
-	sql = "SELECT *  from applicationloan where userid={0}".format(session['users'][0])
+	sql = "SELECT *  from userdetails where ID={0}".format(session['users'][0])
 	cursor.execute(sql)
 	list1 = []
 	for row in cursor:
 		list1.append(row)
 	print list1
 	return render_template('history.html',list1=list1)
+	
+
 	
 	
 @app.route("/applicationloan", methods=['GET','POST'])
@@ -136,6 +138,41 @@ def logout():
 	else :
 		print 'Empty session'
 	return redirect("http://127.0.0.1:5000/login")
+
+@app.route('/delete',methods=['GET'])
+def html():
+	if request.method=='GET':
+		methods = request.args.get('methods')
+		userid  = request.args.getlist('text')
+		print type(userid)
+		print methods
+		if request.args.get('methods') =='DELETE':
+			query = "DELETE FROM userdetails WHERE id IN ({0})".format(session['users'][0])
+			cursor.execute(query)
+			print query
+			conn.commit()
+			list1 = []
+			sql="SELECT * FROM userdetails"
+			cursor.execute(sql)
+			for row in cursor:
+				list1.append(row)
+			return render_template("history.html",list1=list1)
+
+		elif request.args.get('methods') =='UPDATEASCALLED':
+			#format_strings = ','.join(['%s'] * len(userid))
+			query= "INSERT INTO userevents(APPID,STATUS,COMMENT) VALUES({0},'Called','good')".format(session['users'][0])
+			print query
+			cursor.execute(query)
+			conn.commit()
+			return "updated as called successfully"
+
+		elif request.args.get('methods') =="UPDATEASNOTINTERESTED":
+			query = "INSERT INTO userevents(APPID,STATUS,COMMENT) VALUES({0},'NotInterested','good')".format(session['users'][0])
+			cursor.execute(query)
+			conn.commit()
+			return "updated as NotInterested successfully"
+
+
 
 
 if __name__ == '__main__':
