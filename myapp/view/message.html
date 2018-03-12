@@ -1,0 +1,42 @@
+<html>
+    
+    <body>
+        
+        <div style="width:600px; height:400px;">
+            <div style="height:200px;" id='content'></div>
+                <div>
+                    <form id='myForm' action="http://127.0.0.1:3000/message" method="POST">
+                        Message:
+                        <input type="text" name='message' size="40">
+                        <input type="submit" value="submit">
+                    </form>
+                </div>
+        </div>
+                      
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+        $(document).ready(function(){
+            $('#myForm').on('submit',function(e){
+                e.preventDefault();
+                console.log('hiii');                
+                var str = "http://127.0.0.1:3000/message"
+
+                $.ajax({
+                    method:"POST",
+                    url:str
+                }).done(function(data) {
+                    console.log("Response",data);
+                    $("#content").append(data)
+                });
+            });
+            });	
+
+
+
+        
+               
+        
+        </script>
+       
+    
+    </body>
+</html>
